@@ -2,8 +2,8 @@ package main
 import rl "vendor:raylib"
 
 init :: proc() -> rl.Texture {
-	rl.InitWindow(WIDTH, HEIGHT, "Odin Renderer")
-	image := rl.GenImageColor(WIDTH, HEIGHT, rl.BLANK)
+	rl.InitWindow(CANVAS_WIDTH, CANVAS_HEIGHT, "Odin Renderer")
+	image := rl.GenImageColor(CANVAS_WIDTH, CANVAS_HEIGHT, rl.BLANK)
 	texture := rl.LoadTextureFromImage(image)
 	rl.UnloadImage(image)
 
