@@ -3,7 +3,7 @@ package main
 import "core:math"
 import la "core:math/linalg"
 
-intersect_ray_sphere :: proc(origin, direction, center: Vec3, radius: f32) -> (bool, f32, f32) {
+ray_sphere_intersection :: proc(origin, direction, center: Vec3, radius: f32) -> (bool, f32, f32) {
 	oc := origin - center
 	
 	a := la.dot(direction, direction)

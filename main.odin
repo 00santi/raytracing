@@ -12,6 +12,7 @@ main :: proc() {
 	for !rl.WindowShouldClose() {
 	    clear(black)
 	    put_pixel(0, 0, red)
+		main2()
 	    render(texture)
 	}
 }
