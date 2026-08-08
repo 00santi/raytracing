@@ -57,27 +57,29 @@ spheres: [3]Sphere : {
 }
 
 trace_ray :: proc(cam: Vec3, direction: Vec3, t_min, t_max: f32) -> Color {
-	closest_t := t_max
-	hit_any := false
-	closest_sphere: Sphere
+    closest_t := t_max
+    hit_any := false
+    closest_sphere: Sphere
 
-	for s in spheres {
-		hit, t1, t2 := ray_sphere_intersection(cam, direction, s.center, s.radius)
-		if !hit do continue
+    for s in spheres {
+        hit, t1, t2 := ray_sphere_intersection(cam, direction, s.center, s.radius)
 
-		hit_any = true
+        if !hit do continue
 
-		if t1 > t_min && t1 < t_max && t1 < closest_t {
-			closest_t = t1
-			closest_sphere = s
-		}
+        if t1 >= t_min && t1 <= t_max && t1 < closest_t {
+            closest_t = t1
+            closest_sphere = s
+            hit_any = true
+        }
 
-		if t2 > t_min && t2 < t_max && t2 < closest_t {
-			closest_t = t2
-			closest_sphere = s
-		}
-	}
-	if !hit_any do return black
+        if t2 >= t_min && t2 <= t_max && t2 < closest_t {
+            closest_t = t2
+            closest_sphere = s
+            hit_any = true
+        }
+    }
 
-	return closest_sphere.color
+    if !hit_any do return black
+
+    return closest_sphere.color
 }
