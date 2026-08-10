@@ -1,7 +1,5 @@
 package main
-import "core:fmt"
 import rl "vendor:raylib"
-import la "core:math/linalg"
 
 pixels: []Color
 
@@ -13,7 +11,6 @@ main :: proc() {
     viewport_width: f32 = 1
     viewport_height: f32 = 1
     viewport_distance: f32 = 1
-	
 	for !rl.WindowShouldClose() {
 		draw_spheres(camera, viewport_width, viewport_height, viewport_distance)
 	    render(texture)
