@@ -6,8 +6,8 @@ MIN_X :: -CANVAS_WIDTH / 2
 MIN_Y :: -CANVAS_HEIGHT / 2
 MAX_X :: CANVAS_WIDTH / 2
 MAX_Y :: CANVAS_HEIGHT / 2
-VIEWPORT_WIDTH :: 1
-VIEWPORT_HEIGHT :: 1
 
 red :: Color{255, 0, 0, 255}
 black :: Color{0, 0, 0, 255}
+blue :: Color{0, 0, 255, 255}
+green :: Color{0, 255, 0, 255}

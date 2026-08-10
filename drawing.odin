@@ -2,7 +2,6 @@ package main
 import "core:fmt"
 import "core:math"
 import rl "vendor:raylib"
-import la "core:math/linalg"
 
 put_pixel :: proc(x, y: int, color: Color) {
 	if x < MIN_X || x >= MAX_X || y < MIN_Y || y >= MAX_Y {
@@ -29,31 +28,34 @@ render :: proc(texture: rl.Texture) {
 	rl.EndDrawing()
 }
 
-main2 :: proc() {
-	cam := Vec3{0, 0, 0}
-	distance :: 1 // from cam to viewport
+vw: f32
+vh: f32
+
+draw_spheres :: proc(cam: Vec3, viewport_width, viewport_height, viewport_distance: f32) {
+	vw = viewport_width
+	vh = viewport_height
+
 	t_min: f32 : 1
 	t_max: f32 : math.INF_F32
 	
 	for x in MIN_X..<MAX_X {
 		for y in MIN_Y..<MAX_Y {
-			direction := canvas_to_viewport(x, y, distance)
+			direction := canvas_to_viewport(x, y, viewport_distance)
 			color := trace_ray(cam, direction, t_min, t_max)
 			put_pixel(x, y, color)
 		}
 	}
 }
 
-canvas_to_viewport :: proc(x, y, d: int) -> Vec3 {
-	return {f32(x) * f32(VIEWPORT_WIDTH) / f32(CANVAS_WIDTH), 
-			f32(y) * f32(VIEWPORT_HEIGHT) / f32(CANVAS_HEIGHT), 
-			f32(d)}
+canvas_to_viewport :: proc(x, y: int, d: f32) -> Vec3 {
+	return {f32(x) * vw / f32(CANVAS_WIDTH),
+			f32(y) * vh / f32(CANVAS_HEIGHT), d}
 }
 
 spheres: [3]Sphere : {
-	{ Vec3{0, -1, 3}, 1, Color{255, 0, 0, 255} },
-	{ Vec3{2, 0, 4}, 1, Color{0, 0, 255, 255} },
-	{ Vec3{-2, 0, 4}, 1, Color{0, 255, 0, 255} },
+	{ Vec3{0, -1, 3}, 1, red },
+	{ Vec3{2, 0, 4}, 1, blue },
+	{ Vec3{-2, 0, 4}, 1, green },
 }
 
 trace_ray :: proc(cam: Vec3, direction: Vec3, t_min, t_max: f32) -> Color {
