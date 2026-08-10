@@ -13,11 +13,11 @@ spheres: []Sphere : {
 ambient_lights :: []AmbientLight { 
 	{ 0.2 }, 
 }
-directional_lights :: []DirectionalLight { 
-	{ 0.6, Vec3{2, 1, 0} },
-}
 point_lights :: []PointLight { 
 	{ 0.2, Vec3{1, 4, 4} }, 
+}
+directional_lights :: []DirectionalLight { 
+	{ 0.6, Vec3{2, 1, 0} },
 }
 
 draw_spheres :: proc(cam: Vec3, viewport_width, viewport_height, viewport_distance: f32) {
@@ -91,8 +91,8 @@ compute_lighting :: proc(point, normal: Vec3) -> (illumination: f32) {
 		i += light.intensity * light_directness
 	}
 
-	for light in point_lights {
-		L := light.position
+	for light in directional_lights {
+		L := light.direction
 		L = la.normalize(L)
 		light_directness := max(0, la.dot(L, N))
 		i += light.intensity * light_directness

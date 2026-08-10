@@ -8,7 +8,8 @@ MAX_X :: CANVAS_WIDTH / 2
 MAX_Y :: CANVAS_HEIGHT / 2
 
 red :: Color{255, 0, 0, 255}
-black :: Color{0, 0, 0, 255}
-blue :: Color{0, 0, 255, 255}
 green :: Color{0, 255, 0, 255}
+blue :: Color{0, 0, 255, 255}
 yellow :: Color{255, 255, 0, 255}
+black :: Color{0, 0, 0, 255}
+white :: Color{255, 255, 255, 255}
