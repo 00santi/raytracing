@@ -23,3 +23,7 @@ scale_color :: proc(c: Color, intensity: f32) -> Color {
 	b := u8( clamp(f32(c.b) * intensity, 0, 255) )
 	return Color{ r, g, b, c.a }
 }
+
+reflect_ray :: proc(L, N: Vec3) -> Vec3 {
+	return 2 * N * la.dot(N, L) - L
+}

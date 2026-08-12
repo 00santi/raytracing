@@ -9,6 +9,7 @@ Sphere :: struct {
 	center: Vec3,
 	radius: f32,
 	specular: f32, // -1 for matte
+	reflective: f32, // between 0 and 1
 }
 
 AmbientLight :: struct {
