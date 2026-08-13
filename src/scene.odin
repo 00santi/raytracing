@@ -98,9 +98,17 @@ closest_intersection :: proc(O, D: Vec3, t_min, t_max: f32) -> (bool, f32, Spher
 	return hit_any, closest_t, closest_sphere
 }
 
-is_shadowed :: proc(P, L: Vec3, max_t: f32) -> bool {
-	hit, _, _ := closest_intersection(P, L, epsilon, max_t)
-	return hit
+is_shadowed :: proc(P, L: Vec3, t_max: f32) -> bool {
+	for s in spheres {
+		hit, t1, t2 := ray_sphere_intersection(P, L, s.center, s.radius)
+		
+		if (t1 >= epsilon && t1 <= t_max) || 
+		   (t2 >= epsilon && t2 <= t_max) {
+			return true
+		}
+	}
+	
+	return false
 }
 
 // V = point->cam vector
