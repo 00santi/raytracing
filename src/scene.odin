@@ -26,21 +26,30 @@ directional_lights :: []DirectionalLight {
 	{ 0.6, Vec3{2, 1, 0} },
 }
 
-draw_spheres :: proc(cam: Camera, viewport_width, viewport_height, viewport_distance: f32) {
+draw_spheres :: proc(cam: Camera, viewport_width, viewport_height, viewport_distance: f32, subsampling: int) {
 	vw = viewport_width
 	vh = viewport_height
 	vd = viewport_distance
 	
 	t_min: f32 : 1
 	t_max: f32 : INF
-	rec_depth :: 3
+	rec_depth :: 2
 	
-	for x := MIN_X + 1; x < MAX_X; x += 2 {
-		for y := MIN_Y + 1; y < MAX_Y; y += 2 {
+	steps := 1 + subsampling
+	
+	for x := MIN_X; x < MAX_X; x += steps {
+		for y := MIN_Y; y < MAX_Y; y += steps {
 			direction := cam.rotation * canvas_to_viewport(x, y)
 			color := trace_ray(cam.position, direction, t_min, t_max, rec_depth)
-			put_pixel(x, y, color)
-			put_pixel(x - 1, y - 1, color)
+
+			for dx in 0..<steps {
+				for dy in 0..<steps {
+					px := x + dx
+					py := y + dy
+
+	                if px < MAX_X && py < MAX_Y do put_pixel(px, py, color)
+	            }
+			}
 		}
 	}
 }

@@ -27,3 +27,15 @@ scale_color :: proc(c: Color, intensity: f32) -> Color {
 reflect_ray :: proc(L, N: Vec3) -> Vec3 {
 	return 2 * N * la.dot(N, L) - L
 }
+
+get_rotation_matrix :: proc(yaw, pitch: f32) -> Mat3 {
+	cp := math.cos(pitch)
+    sp := math.sin(pitch)
+    cy := math.cos(yaw)
+    sy := math.sin(yaw)
+    return Mat3 {
+        cy,  0,   sy,
+        0,  cp, -sp,
+        -sy,  sp,  cp * cy,
+    }
+}
