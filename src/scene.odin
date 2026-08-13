@@ -35,11 +35,12 @@ draw_spheres :: proc(cam: Camera, viewport_width, viewport_height, viewport_dist
 	t_max: f32 : INF
 	rec_depth :: 3
 	
-	for x in MIN_X..<MAX_X {
-		for y in MIN_Y..<MAX_Y {
+	for x := MIN_X + 1; x < MAX_X; x += 2 {
+		for y := MIN_Y + 1; y < MAX_Y; y += 2 {
 			direction := cam.rotation * canvas_to_viewport(x, y)
 			color := trace_ray(cam.position, direction, t_min, t_max, rec_depth)
 			put_pixel(x, y, color)
+			put_pixel(x - 1, y - 1, color)
 		}
 	}
 }
