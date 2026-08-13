@@ -7,7 +7,7 @@ main :: proc() {
 	pixels = make([]Color, CANVAS_WIDTH * CANVAS_HEIGHT)
 	texture := init()
 
-	camera := Vec3{0, 0, 0}
+	camera := Camera{ Vec3{0, 0, 0}, 1 } // 1 = identity matrix
     viewport_width: f32 = 1
     viewport_height: f32 = 1
     viewport_distance: f32 = 1

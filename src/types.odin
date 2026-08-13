@@ -1,8 +1,8 @@
 package main
 
 Color :: [4]u8
-
 Vec3 :: [3]f32
+Mat3 :: matrix[3, 3]f32
 
 Sphere :: struct {
 	color: Color,
@@ -24,4 +24,9 @@ PointLight :: struct {
 DirectionalLight :: struct {
 	intensity: f32,
 	direction: Vec3,
+}
+
+Camera :: struct {
+	position: Vec3,
+	rotation: Mat3,
 }
